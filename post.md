@@ -194,7 +194,7 @@ Using ES6 modules sound thrilling, but since they are targeted for June 2015, wh
 
 Enter [Babel](https://babeljs.io/), my personal choice of ES6 to ES5 transpiler (a transpiler is a source-to-source compiler, i.e., it will transform ES6 source code into ES5 source code). Babel works for both client-side and server-side JavaScript.
 
-To implement the example above, I am using the [Babelify plugin](https://github.com/babel/babelify) over Browserify to transform the ES6 source code directly into a ES5 browser bundle. However, it would be just as simple to transpile the files individually, if you are curious to know how the ES5 source would be. All you would need to do is:
+To implement the example above, I am using the [Babelify plugin](https://github.com/babel/babelify) over Browserify to transform the ES6 source code directly into a ES5 browser bundle. However, it would be just as simple to transpile the files individually, if you are curious to know how the ES5 source would be. You can even choose it to be transpiled to a specific format, like Common.js or AMD! All you would need to do is:
 
 ```
 npm install -g babel
