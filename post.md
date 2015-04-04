@@ -100,7 +100,7 @@ var myWolf = new Zoo.Wolf('Werewolf');
 console.log(myWolf.bark()); // Werewolf: woooooow!
 ```
 
-This code is also available as a [live example of a Common.js module](http://tiagorg.com/js-modules/commonjs/index.html). You can also [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/commonjs). In this example I am using [Browserify](http://browserify.org) to transform the source code on a browser bundle.
+This code is also available as a [live example of a Common.js module](http://tiagorg.com/js-modules/commonjs/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/commonjs). In this example I am using [Browserify](http://browserify.org) to transform the source code on a browser bundle.
 
 2) [**AMD**](https://github.com/amdjs/amdjs-api) is a standard for asynchronous modules, which is specially interesting for client-side JavaScript. On this format, your module file will publicly expose whatever is being returned on the callback function, just like our first ad hoc example. The following example uses the quintessential AMD implementation, [Require.js](http://requirejs.org):
 
@@ -140,7 +140,7 @@ require(['zoo'], function(Zoo) {
 });
 ```
 
-This code is also available as a [live example of an AMD module](http://tiagorg.com/js-modules/amd/index.html). You can also [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/amd).
+This code is also available as a [live example of an AMD module](http://tiagorg.com/js-modules/amd/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/amd).
 
 PS: As you might suppose, you will run into both standards quite frequently, and there will be times you might want to use a CommonJS module on an AMD component and vice-versa. Please allow me to spoil your surprise: they are not naturally compatible!
 
@@ -182,7 +182,7 @@ var myWolf = new Wolf('Werewolf');
 console.log(myWolf.bark()); // Werewolf: woooooow!
 ```    
 
-This code is also available as a [live example of an ES6 module](http://tiagorg.com/js-modules/es6/index.html). You can also [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/es6). 
+This code is also available as a [live example of an ES6 module](http://tiagorg.com/js-modules/es6/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/es6). 
 
 Not only ES6 has brought modules, but it also brought a solution for the CommonJS vs AMD battle! According to [Dr. Axel Rauschmayer's article](http://www.2ality.com/2014/09/es6-modules-final.html), ES6 modules will support both synchronous and asynchronous loading within the same syntax.
 
