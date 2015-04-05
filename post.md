@@ -242,7 +242,7 @@ Since in a real project you are hopefully not transpiling files manually, but in
 
 ## Who you gonna call?
 
-Modules are a big deal for sure. That is why the JavaScript community is so concerned on striving for everyone to use them as seamless as possible, as you can see with the ES6 modules initiative.
+Modules are a big deal for sure. All the most successful MV* frameworks rely on a strong module-oriented architecture, such as AngularJS, Ember.js, Marionette.js and React. This is why the JavaScript community is so concerned on striving for everyone to use them as seamless as possible, as you can see with the ES6 modules initiative.
 
 However, we still have to take into consideration the plethora of existing code which is too big to be rewritten into ES6 soon enough. Depending on the size, complexity and risk of the project, this might never happen. Still, even if all the major browsers start supporting ES6 this year, it would take a handful of years for most of the worldwide population (or at least your clients) to be effectively using browsers supporting ES6. Just as a sad-trombone example, IE 8 was released exactly 6 years ago.
 
