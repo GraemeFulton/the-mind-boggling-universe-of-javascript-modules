@@ -222,7 +222,7 @@ This code is also available as a [live example of an ES6 module](http://tiagorg.
 
 Not only ES6 has brought modules, but it also brought a solution for the CommonJS vs AMD battle! According to this [Dr. Axel Rauschmayer's article](http://www.2ality.com/2014/09/es6-modules-final.html), ES6 modules will support both synchronous and asynchronous loading within the same syntax. And even better, they will work both on the browser and on the server!
 
-One more good news: this syntax is confirmed to be finalized, i.e., syntax changes aren't expected for ES6 Modules. 
+One more good news: this syntax is finalized, so further syntax changes aren't expected for ES6 Modules. This means that you can start learning it right now!
 
 ## Babel for the rescue
 
