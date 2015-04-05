@@ -61,7 +61,7 @@ Just to name a few reasons why every JavaScript developer should use modules as 
 ## To be or not to be, CommonJS or AMD?
 
 Have another look on the ad hoc module example above. Since we are defining 2 files, we are still writing and reading the variable ```Zoo``` into the global JavaScript context. This is definitely not recommended, once it is:
-- fragile (because any next code can modify your module definition),
+- fragile (as it is possible for any posterior code to modify/redefine your module),
 - not scalable (if you need to define 100 modules, all of them will be loaded on the global JavaScript context, even if you actually consume just 1 out of those 100 modules, making it really bad for performance),
 - counter-productive (if you have dependencies on your modules you will have to manually port them all over if you intend to use your module in another app).
 
@@ -184,7 +184,7 @@ Nevertheless, a number of approaches are there to provide such compatibility,  s
 
 ## Now, forget about that. ES6 is right around the corner!
 
-Earlier I've affirmed that the JavaScript language support for Modules isn't much explicit on its current version (officially known as ECMAScript 5 or just ES5). However, it turns out that JavaScript Modules **just have become explicit**!
+Earlier I've affirmed that the JavaScript language support for Modules isn't much explicit on its current version (officially known as ECMAScript 5 or just ES5). However, it turns out that JavaScript Modules **have just become explicit**!
 
 The upcoming version of JavaScript (ECMAScript 6 or ES6) offers native support for modules in a compact and effective way, quite a bit similar to CommonJS. See how it will look like:
     
