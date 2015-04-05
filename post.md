@@ -6,10 +6,12 @@ The importance of adopting a proper JavaScript Module strategy is often underest
 
 In brief terms, JavaScript Modules were created in order to apply some classic Object Orientation ideas when building components, once the current JavaScript language support for those ideas isn't as explicit as in other languages as C++, Java and Ruby.
 
-In order to build a module as a special type of object, which strongly needs to leverage encapsulation, we need to add support for declaring private/public attributes and methods inside a single object. Such encapsulation is achieved through **function closures**, taking advantage of the **function scope** to publicly disclose only what is necessary through the return of the function. Look at the following example for an ad hoc module implementation:
+In order to build a module as a special type of object, which strongly needs to leverage encapsulation, we need to add support for declaring private/public attributes and methods inside a single object. Such encapsulation is achieved through **function closures**, taking advantage of the **function scope** to publicly disclose only what is necessary through the return of the function. 
 
+Look at the following example for an ad hoc module implementation:
+
+**zoo.js:**
 ```javascript
-// zoo.js
 var Zoo = (function() { 
   var getBarkStyle = function(isHowler) {
     return isHowler? 'woooooow!': 'woof, woof!';
@@ -31,8 +33,10 @@ var Zoo = (function() {
 })();
 ```
 
+In ```zoo.js```, we have built the module ```Zoo``` which only publicly exposes the functions ```Dog``` and ```Wolf```, keeping the function ```getBarkStyle``` as private to the module. Now, let's see how to consume this module:
+
+**main.js:** 
 ```javascript
-// main.js
 var myDog = new Zoo.Dog('Sherlock', 'beagle');
 console.log(myDog.bark()); // Sherlock: woof, woof!
 
@@ -40,7 +44,7 @@ var myWolf = new Zoo.Wolf('Werewolf');
 console.log(myWolf.bark()); // Werewolf: woooooow!
 ```
 
-In the above example, we have built the module ```Zoo``` which only publicly exposes the functions ```Dog``` and ```Wolf```, keeping the function ```getBarkStyle``` as private to the module.
+In ```main.js```, we are reading the global variable ```Zoo``` and instantiating ```Dog``` and ```Wolf``` from it.
 
 I have put together a full [live example of the ad-hoc module](http://tiagorg.com/js-modules/ad-hoc/index.html). You can also [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/ad-hoc).
 
@@ -65,8 +69,8 @@ Since modules are definitely a good idea, but ad hoc modules are not that solid,
 
 1) [**CommonJS**](http://www.commonjs.org/) is a standard for synchronous modules, adopted as the official module format for [Node.js](https://nodejs.org) and [NPM](http://npmjs.com) components. On this format, your module file will publicly expose whatever is assigned to ```module.exports``` while everything else is private. Check out the following example:
 
+**zoo.js:**
 ```javascript
-// zoo.js
 var getBarkStyle = function(isHowler) {
   return isHowler? 'woooooow!': 'woof, woof!';
 }; 
@@ -89,8 +93,8 @@ module.exports = {
 
 Note that the public content is returned at once through ```module.exports```.
 
+**main.js:**
 ```javascript
-// main.js
 var Zoo = require('./zoo');
 
 var myDog = new Zoo.Dog('Sherlock', 'beagle');
@@ -104,8 +108,8 @@ This code is also available as a [live example of a Common.js module](http://tia
 
 2) [**AMD**](https://github.com/amdjs/amdjs-api) is a standard for asynchronous modules, which is specially interesting for client-side JavaScript. On this format, your module file will publicly expose whatever is being returned on the callback function, just like our first ad hoc example. The following example uses the quintessential AMD implementation, [Require.js](http://requirejs.org):
 
+**zoo.js:**
 ```javascript
-// zoo.js
 define('zoo', [], function() {
   var getBarkStyle = function (isHowler) {
     return isHowler? 'woooooow!': 'woof, woof!';
@@ -129,8 +133,8 @@ define('zoo', [], function() {
 
 Note that the public content is returned at once through the function return, just like the ad hoc implementation.
 
+**main.js:**
 ```javascript
-// main.js
 require(['zoo'], function(Zoo) {
   var myDog = new Zoo.Dog('Sherlock', 'beagle');
   console.log(myDog.bark()); // Sherlock: woof, woof!
@@ -152,8 +156,8 @@ Earlier I've affirmed that the JavaScript language support for Modules isn't muc
 
 The upcoming version of JavaScript (ECMAScript 6 or ES6) offers native support for modules in a compact and effective way, quite a bit similar to CommonJS. See how it will look like:
     
+**zoo.js:**    
 ```javascript
-// zoo.js
 var getBarkStyle = function(isHowler) {
   return isHowler? 'woooooow!': 'woof, woof!';
 }; 
@@ -171,8 +175,8 @@ export function Wolf(name) {
 
 Note that now we can have more than one ```export``` per module. This way, the client code can choose which functions it wants to ```import``` from the module:
 
+**main.js:**
 ```javascript
-// main.js
 import { Dog, Wolf } from './zoo';
 
 var myDog = new Dog('Sherlock', 'beagle');
@@ -196,7 +200,7 @@ Enter [Babel](https://babeljs.io/), my personal choice of ES6 to ES5 transpiler 
 
 To implement the example above, I am using the [Babelify plugin](https://github.com/babel/babelify) over Browserify to transform the ES6 source code directly into a ES5 browser bundle. However, it would be just as simple to transpile the files individually, if you are curious to know how the ES5 source would be. You can even choose it to be transpiled to a specific format, like Common.js or AMD! All you would need to do is:
 
-```
+```bash
 npm install -g babel
 babel --modules common zoo.js -o zoo-commonjs.es6
 babel --modules amd zoo.js -o zoo-amd.es6
