@@ -220,7 +220,7 @@ console.log(myWolf.bark()); // Werewolf: woooooow!
 
 This code is also available as a [live example of an ES6 module](http://tiagorg.com/js-modules/es6/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/es6). 
 
-Not only ES6 has brought modules, but it also brought a solution for the CommonJS vs AMD battle! According to [Dr. Axel Rauschmayer's article](http://www.2ality.com/2014/09/es6-modules-final.html), ES6 modules will support both synchronous and asynchronous loading within the same syntax.
+Not only ES6 has brought modules, but it also brought a solution for the CommonJS vs AMD battle! According to this [Dr. Axel Rauschmayer's article](http://www.2ality.com/2014/09/es6-modules-final.html), ES6 modules will support both synchronous and asynchronous loading within the same syntax. And even better, they will work both on the browser and on the server!
 
 One more good news: this syntax is confirmed to be finalized, i.e., syntax changes aren't expected for ES6 Modules. 
 
