@@ -67,7 +67,23 @@ Have another look on the ad hoc module example above. Since we are defining 2 fi
 
 Since modules are definitely a good idea, but ad hoc modules are not that solid, many developers started to elaborate around them, striving for a module standard that would overcome the setbacks above. After some coming and going, two module standards have gained some momentum:
 
-1) [**CommonJS**](http://www.commonjs.org/) is a standard for synchronous modules, adopted as the official module format for [Node.js](https://nodejs.org) and [NPM](http://npmjs.com) components. On this format, your module file will publicly expose whatever is assigned to ```module.exports``` while everything else is private. Check out the following example:
+1) [**CommonJS**](http://www.commonjs.org/) is a standard for **synchronous** modules.
+
+Pros: 
+- It was adopted as the official module format for [Node.js](https://nodejs.org) and [NPM](http://npmjs.com) components. This means that any module defined in CommonJS will have access to the whole NPM ecosystem.
+- It has a simple and convenient syntax.
+- It is possible to guarantee the order of execution of modules.
+
+Cons: 
+- It doesn't naturally work on the browser, however there are great solutions for this constraint as [Browserify](http://browserify.org) and [Webpack](http://webpack.github.io).
+- Since it is synchronous, the modules have to be loaded sequentially, which might take more time than if it were to be loaded asynchronously.
+- On the average, NPM modules are composed by many other modules, which means that you might end up depending on a high number of modules, which means your bundles can easily get big.
+
+When to use: CommonJS is already a mature standard for server-side, and a good option for client-side when the page-load Javascript bundles are not too big.
+
+How to use: Your module file will publicly expose whatever is assigned to ```module.exports``` while everything else is private. In order to use your module, the client code needs to use the ```require``` function, referencing your module per file location or alias.
+
+Check out the following example:
 
 **zoo.js:**
 ```javascript
@@ -104,9 +120,25 @@ var myWolf = new Zoo.Wolf('Werewolf');
 console.log(myWolf.bark()); // Werewolf: woooooow!
 ```
 
-This code is also available as a [live example of a Common.js module](http://tiagorg.com/js-modules/commonjs/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/commonjs). In this example I am using [Browserify](http://browserify.org) to transform the source code on a browser bundle.
+This code is also available as a [live example of a Common.js module](http://tiagorg.com/js-modules/commonjs/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/commonjs). In this example I am using Browserify to transform the source code on a browser bundle.
 
-2) [**AMD**](https://github.com/amdjs/amdjs-api) is a standard for asynchronous modules, which is specially interesting for client-side JavaScript. On this format, your module file will publicly expose whatever is being returned on the callback function, just like our first ad hoc example. The following example uses the quintessential AMD implementation, [Require.js](http://requirejs.org):
+2) [**AMD**](https://github.com/amdjs/amdjs-api) (Asynchronous Module Definition) is a standard for **asynchronous** modules.
+
+Pros: 
+- Multiple modules can be loaded in parallel.
+- It is very convenient to defer the loading of modules that are not necessary on page load.
+- It naturally works on the browser.
+
+Cons:
+- Asynchronous loading is a complex subject and can easily create race conditions if not properly designed.
+- It isn't possible to guarantee the order of execution of modules.
+- Its syntax can get hard to understand, specially when the dependencies array is large.
+
+When to use: AMD is specially interesting for client-side applications that can benefit from the lazy loading of modules, but it needs to be used carefully.
+
+How to use: Your module will publicly expose whatever is being returned on the callback function, just like our first ad hoc example. In order to use your module, the client code needs to refer to it (per file location or alias) on its dependencies array, which will map to an argument on its own callback function.
+
+The following example uses the quintessential AMD implementation, [Require.js](http://requirejs.org), where it declares the ```zoo``` module using ```define``` and consume it later using ```require```:
 
 **zoo.js:**
 ```javascript
