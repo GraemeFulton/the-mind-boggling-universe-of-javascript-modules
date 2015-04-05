@@ -67,7 +67,9 @@ Have another look on the ad hoc module example above. Since we are defining 2 fi
 
 Since modules are definitely a good idea, but ad hoc modules are not that solid, many developers started to elaborate around them, striving for a module standard that would overcome the setbacks above. After some coming and going, two module standards have gained some momentum:
 
-1) [**CommonJS**](http://www.commonjs.org/) is a standard for **synchronous** modules.
+### 1) CommonJS
+
+[**CommonJS**](http://www.commonjs.org/) is a standard for **synchronous** modules.
 
 Pros: 
 - It was adopted as the official module format for [Node.js](https://nodejs.org) and [NPM](http://npmjs.com) components. This means that any module defined in CommonJS will have access to the whole NPM ecosystem.
@@ -122,7 +124,9 @@ console.log(myWolf.bark()); // Werewolf: woooooow!
 
 This code is also available as a [live example of a Common.js module](http://tiagorg.com/js-modules/commonjs/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/commonjs). In this example I am using Browserify to transform the source code on a browser bundle.
 
-2) [**AMD**](https://github.com/amdjs/amdjs-api) (Asynchronous Module Definition) is a standard for **asynchronous** modules.
+### 2) AMD
+
+[**AMD**](https://github.com/amdjs/amdjs-api) (Asynchronous Module Definition) is a standard for **asynchronous** modules.
 
 Pros: 
 - Multiple modules can be loaded in parallel.
