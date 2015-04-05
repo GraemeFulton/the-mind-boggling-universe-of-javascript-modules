@@ -230,7 +230,7 @@ Using ES6 modules sound thrilling, but since they are targeted for June 2015, wh
 
 Enter [Babel](https://babeljs.io/), my personal choice of ES6 to ES5 transpiler (a transpiler is a source-to-source compiler, i.e., it will transform ES6 source code into ES5 source code). Babel works for both client-side and server-side JavaScript.
 
-To implement the example above, I am using the [Babelify plugin](https://github.com/babel/babelify) over Browserify to transform the ES6 source code directly into a ES5 browser bundle. However, it would be just as simple to transpile the files individually, if you are curious to know how the ES5 source would be. You can even choose it to be transpiled to a specific format, like Common.js or AMD! All you would need to do is:
+To implement the example above, I am using the [Babelify plugin](https://github.com/babel/babelify) over Browserify to transform the ES6 source code directly into an ES5 browser bundle. However, it would be just as simple to transpile the files individually, if you are curious to know how the ES5 source would be. You can even choose it to be transpiled to a specific format, like Common.js or AMD! All you would need to do is:
 
 ```bash
 npm install -g babel
@@ -238,14 +238,14 @@ babel --modules common zoo.js -o zoo-commonjs.es6
 babel --modules amd zoo.js -o zoo-amd.es6
 ```
 
-Since in a real project you are hopefully not transpiling files manually, but instead adopting some build system to do that for you, you will be very happy to know that Babel supports most of builders and assets pipelines, even Rails is on the list! Check out how Babel integrates with your [favorite asset pipeline](https://babeljs.io/docs/using-babel/#build-systems).
+Since in a real project you are hopefully not transpiling files manually, but instead adopting some build system to do that for you, you will be very happy to know that Babel supports most of builders and assets pipelines, and even Rails is on the list! Check out how Babel integrates with your [favorite asset pipeline](https://babeljs.io/docs/using-babel/#build-systems).
 
 ## Who you gonna call?
 
 Modules are a big deal for sure. All the most successful MV* frameworks rely on a strong module-oriented architecture, such as AngularJS, Ember.js, Marionette.js and React. This is why the JavaScript community is so concerned on striving for everyone to use them as seamless as possible, as you can see with the ES6 modules initiative.
 
-However, we still have to take into consideration the plethora of existing code which is too big to be rewritten into ES6 soon enough. Depending on the size, complexity and risk of the project, this might never happen. Still, even if all the major browsers start supporting ES6 this year, it would take a handful of years for most of the worldwide population (or at least your clients) to be effectively using browsers supporting ES6. Just as a sad-trombone example, IE 8 was released exactly 6 years ago.
+However, we still have to take into consideration the plethora of existing code which is too big to be rewritten into ES6 anytime soon. Depending on the size, complexity and risk of the project, this might never happen. Still, even if all the major browsers start supporting ES6 this year, it would take a handful of years for most of the worldwide population (or at least your clients) to be effectively using those browser versions supporting ES6. Just for a sad-trombone example, IE 8 was released exactly 6 years ago.
 
-Anyhow, the other way around is totally feasible and recommended. Writing new code on ES6 with a good transpiler for now is something worth taking a deep look at. The benefits are great: more concise syntax, great support for the current Module strategies, and the best thing: you are embracing the future of JavaScript!
+Anyhow, the other way around is totally feasible and recommended. Writing new code on ES6 with a good transpiler is totally worth taking a deep look at. The benefits are great: more concise syntax, great support for the current Module strategies, and the best thing: you are embracing the future of JavaScript!
 
 When in doubt, remember that Fortune favors the brave. Or just remember Ghostbusters: I ain't afraid of no ghost.
