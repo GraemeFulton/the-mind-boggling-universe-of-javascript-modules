@@ -76,12 +76,12 @@ Pros:
 
 Cons: 
 - It doesn't naturally work on the browser, however there are great solutions for this constraint as [Browserify](http://browserify.org) and [Webpack](http://webpack.github.io).
-- Since it is synchronous, the modules have to be loaded sequentially, which might take more time than if it were to be loaded asynchronously.
-- On the average, NPM modules are composed by many other modules, which means that you might end up depending on a high number of modules, which means your bundles can easily get big.
+- Since it is synchronous, the modules have to be loaded sequentially, which might take more time than if they were to be loaded asynchronously.
+- Usually, NPM modules are composed by many other modules, which means that you might end up depending on a high number of modules, and your bundles can easily get big.
 
-When to use: CommonJS is already a mature standard for server-side, and a good option for client-side when the page-load Javascript bundles are not too big.
+When to use: CommonJS is already a mature standard for the server-side, and a good option for the client-side when the page-load Javascript bundles are not too big.
 
-How to use: Your module file will publicly expose whatever is assigned to ```module.exports``` while everything else is private. In order to use your module, the client code needs to use the ```require``` function, referencing your module per file location or alias.
+How to use: Your module file will publicly expose whatever is assigned to ```module.exports``` while everything else is private. In order to use your module, the client code needs to use the ```require(dependency)``` function, referencing your module per file location or alias.
 
 Check out the following example:
 
@@ -126,19 +126,19 @@ This code is also available as a [live example of a Common.js module](http://tia
 
 Pros: 
 - Multiple modules can be loaded in parallel.
-- It is very convenient to defer the loading of modules that are not necessary on page load.
 - It naturally works on the browser.
+- It is very convenient to defer the loading of modules that are not necessary on page load.
 
 Cons:
-- Asynchronous loading is a complex subject and can easily create race conditions if not properly designed.
+- Asynchronous loading is a complex subject and it can easily create race conditions if not properly designed.
 - It isn't possible to guarantee the order of execution of modules.
 - Its syntax can get hard to understand, specially when the dependencies array is large.
 
 When to use: AMD is specially interesting for client-side applications that can benefit from the lazy loading of modules, but it needs to be used carefully.
 
-How to use: Your module will publicly expose whatever is being returned on the callback function, just like our first ad hoc example. In order to use your module, the client code needs to refer to it (per file location or alias) on its dependencies array, which will map to an argument on its own callback function.
+How to use: Your module will publicly expose whatever is being returned on the callback function, similarly to our first ad hoc example. In order to use your module, the client code needs to refer to it (per file location or alias) on its dependencies array, which will map to an argument on its own callback function.
 
-The following example uses the quintessential AMD implementation, [Require.js](http://requirejs.org), where it declares the ```zoo``` module using ```define``` and consume it later using ```require```:
+The following example uses the quintessential AMD implementation, [Require.js](http://requirejs.org), where it declares the ```zoo``` module using ```define(alias, dependenciesArray, callbackFunction)``` and consumes it later using ```require(dependenciesArray, callbackFunction)```:
 
 **zoo.js:**
 ```javascript
