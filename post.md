@@ -6,7 +6,7 @@ The importance of adopting a proper JavaScript Module strategy is often underest
 
 In brief terms, JavaScript Modules were created in order to apply some classic Object Orientation ideas when building components, once the current JavaScript language support for those ideas isn't as explicit as in other languages as C++, Java and Ruby.
 
-In order to build a module as a special type of object, which strongly needs to leverage encapsulation, we need to add support for declaring private/public attributes and methods inside a single object. Such encapsulation is achieved through **function closures**, taking advantage of the **function scope** to publicly disclose only what is necessary through the return of the function. 
+In order to build a module as a special type of object, which strongly needs to leverage encapsulation, we need to add support for declaring private/public attributes and methods inside a single object. Enter the [Module pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript), where such encapsulation is achieved through **function closures**, taking advantage of the **function scope** to publicly disclose only what is necessary through the return of the function. 
 
 Look at the following example for an ad hoc module implementation:
 
@@ -44,7 +44,9 @@ var myWolf = new Zoo.Wolf('Werewolf');
 console.log(myWolf.bark()); // Werewolf: woooooow!
 ```
 
-In ```main.js```, we are reading the global variable ```Zoo``` and instantiating ```Dog``` and ```Wolf``` from it.
+In ```main.js```, we are reading the global variable ```Zoo``` and instantiating ```Dog``` and ```Wolf``` from it. Note here that ```Zoo``` is also serving as a namespace for its functions, which is encouraged over root-level functions in order to avoid conflicts with other modules defining functions with similar names.
+
+Precisely, this implementation is a module variation known as the [Revealing Module pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript).
 
 I have put together a full [live example of the ad-hoc module](http://tiagorg.com/js-modules/ad-hoc/index.html). You can also [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/ad-hoc).
 
@@ -62,10 +64,12 @@ Just to name a few reasons why every JavaScript developer should use modules as 
 
 Have another look on the ad hoc module example above. Since we are defining 2 files, we are still writing and reading the variable ```Zoo``` into the global JavaScript context. This is definitely not recommended, once it is:
 - fragile (as it is possible for any posterior code to modify/redefine your module),
-- not scalable (if you need to define 100 modules, all of them will be loaded on the global JavaScript context, even if you actually consume just 1 out of those 100 modules, making it really bad for performance),
-- counter-productive (if you have dependencies on your modules you will have to manually port them all over if you intend to use your module in another app).
+- not scalable (if you need to define 100 modules, all of them will be loaded on the global JavaScript context, even if you end up consuming just 1 out of those 100 modules, making it really bad for performance),
+- counter-productive (you have to manually resolve your dependencies, and you would need to remember to bring them altogether if you were to use your module in another application).
 
-Since modules are definitely a good idea, but ad hoc modules are not that solid, many developers started to elaborate around them, striving for a module standard that would overcome the setbacks above. After some coming and going, two module standards have gained some momentum:
+A good solution for such setbacks is adopting a Module Loader. As a matter of fact, it would be entirely possible for you to write your own module loader! For instance, your homemade loader would register modules under aliases, resolve dependencies through Dependency Injection and adopt a Factory to instantiate the modules. 
+
+Over the course of time, many developers started to elaborate around modules and module loaders, striving for defining a multi-purpose Module Standard. After some coming and going, two module standards have gained some momentum:
 
 ### 1) CommonJS
 
