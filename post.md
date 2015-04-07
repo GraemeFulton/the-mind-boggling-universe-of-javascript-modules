@@ -33,7 +33,9 @@ var Zoo = (function() {
 })();
 ```
 
-In ```zoo.js```, we have built the module ```Zoo``` which only publicly exposes the functions ```Dog``` and ```Wolf```, keeping the function ```getBarkStyle``` as private to the module. Now, let's see how to consume this module:
+In ```zoo.js```, we have built the module ```Zoo``` which only publicly exposes the functions ```Dog``` and ```Wolf```, keeping the function ```getBarkStyle``` as private to the module. Precisely, this implementation is a module variation known as the [Revealing Module pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript).
+
+Now, let's see how to consume this module:
 
 **main.js:** 
 ```javascript
@@ -44,9 +46,7 @@ var myWolf = new Zoo.Wolf('Werewolf');
 console.log(myWolf.bark()); // Werewolf: woooooow!
 ```
 
-In ```main.js```, we are reading the global variable ```Zoo``` and instantiating ```Dog``` and ```Wolf``` from it. Note here that ```Zoo``` is also serving as a namespace for its functions, which is encouraged over root-level functions in order to avoid conflicts with other modules defining functions with similar names.
-
-Precisely, this implementation is a module variation known as the [Revealing Module pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript).
+In ```main.js```, we are reading the global variable ```Zoo``` and instantiating ```Dog``` and ```Wolf``` from it. Note here that ```Zoo``` is also serving as a namespace for its functions, which is encouraged over root-level functions in order to avoid conflicts with other modules defining functions with similar names. 
 
 I have put together a full [live example of the ad-hoc module](http://tiagorg.com/js-modules/ad-hoc/index.html). You can also [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/ad-hoc).
 
@@ -67,7 +67,7 @@ Have another look on the ad hoc module example above. Since we are defining 2 fi
 - not scalable (if you need to define 100 modules, all of them will be loaded on the global JavaScript context, even if you end up consuming just 1 out of those 100 modules, making it really bad for performance),
 - counter-productive (you have to manually resolve your dependencies, and you would need to remember to bring them altogether if you were to use your module in another application).
 
-A good solution for such setbacks is adopting a Module Loader. As a matter of fact, it would be entirely possible for you to write your own module loader! For instance, your homemade loader would register modules under aliases, resolve dependencies through Dependency Injection and adopt a Factory to instantiate the modules. 
+A good solution for such setbacks is adopting a Module Loader. As a matter of fact, it would be entirely possible for you to write your own module loader! A simple homemade loader would just need to register modules under aliases, resolve dependencies through Dependency Injection and instantiate the modules through a Factory. 
 
 Over the course of time, many developers started to elaborate around modules and module loaders, striving for defining a multi-purpose Module Standard. After some coming and going, two module standards have gained some momentum:
 
