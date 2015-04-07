@@ -75,19 +75,19 @@ Over the course of time, many developers started to elaborate around modules and
 
 [**CommonJS**](http://www.commonjs.org/) is a standard for **synchronous** modules.
 
-Pros: 
+**Pros:**
 - It was adopted as the official module format for [Node.js](https://nodejs.org) and [NPM](http://npmjs.com) components. This means that any module defined in CommonJS will have access to the whole NPM ecosystem.
 - It has a simple and convenient syntax.
 - It is possible to guarantee the order of execution of modules.
 
-Cons: 
+**Cons:**
 - It doesn't naturally work on the browser, however there are great solutions for this constraint as [Browserify](http://browserify.org) and [Webpack](http://webpack.github.io).
 - Since it is synchronous, the modules have to be loaded sequentially, which might take more time than if they were to be loaded asynchronously.
 - Usually, NPM modules are composed by many other modules, which means that you might end up depending on a high number of modules, and your bundles can easily get big.
 
-When to use: CommonJS is already a mature standard for the server-side, and a good option for the client-side when the page-load Javascript bundles are not too big.
+**When to use:** CommonJS is already a mature standard for the server-side, and a good option for the client-side when the page-load Javascript bundles are not too big.
 
-How to use: Your module file will publicly expose whatever is assigned to ```module.exports``` while everything else is private. In order to use your module, the client code needs to use the ```require(dependency)``` function, referencing your module per file location or alias.
+**How to use:** Your module file will publicly expose whatever is assigned to ```module.exports``` while everything else is private. In order to use your module, the client code needs to use the ```require(dependency)``` function, referencing your module per file location or alias.
 
 Check out the following example:
 
@@ -132,19 +132,19 @@ This code is also available as a [live example of a Common.js module](http://tia
 
 [**AMD**](https://github.com/amdjs/amdjs-api) (Asynchronous Module Definition) is a standard for **asynchronous** modules.
 
-Pros: 
+**Pros:**
 - Multiple modules can be loaded in parallel.
 - It naturally works on the browser.
 - It is very convenient to defer the loading of modules that are not necessary on page load.
 
-Cons:
+**Cons:**
 - Asynchronous loading is a complex subject and it can easily create race conditions if not properly designed.
-- It isn't possible to guarantee the order of execution of modules.
+- It isn't possible to guarantee the order of execution of asynchronous modules.
 - Its syntax can get hard to understand, specially when the dependencies array is large.
 
-When to use: AMD is specially interesting for client-side applications that can benefit from the lazy loading of modules, but it needs to be used carefully.
+**When to use:** AMD is specially interesting for client-side applications that can benefit from the lazy loading of modules, but it needs to be used carefully.
 
-How to use: Your module will publicly expose whatever is being returned on the callback function, similarly to our first ad hoc example. In order to use your module, the client code needs to refer to it (per file location or alias) on its dependencies array, which will map to an argument on its own callback function.
+**How to use:** Your module will publicly expose whatever is being returned on the callback function, similarly to our first ad hoc example. In order to use your module, the client code needs to refer to it (per file location or alias) on its dependencies array, which will map to an argument on its own callback function.
 
 The following example uses the quintessential AMD implementation, [Require.js](http://requirejs.org), where it declares the ```zoo``` module using ```define(alias, dependenciesArray, callbackFunction)``` and consumes it later using ```require(dependenciesArray, callbackFunction)```:
 
@@ -186,9 +186,13 @@ require(['zoo'], function(Zoo) {
 
 This code is also available as a [live example of an AMD module](http://tiagorg.com/js-modules/amd/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/amd).
 
-PS: As you might suppose, you will run into both standards quite frequently, and there will be times you might want to use a CommonJS module on an AMD component and vice-versa. Please allow me to spoil your surprise: they are not naturally compatible!
+### Is there any interop?
 
-Nevertheless, a number of approaches are there to provide such compatibility,  striving to come up with a way to write your module just once and have it working on both standards. Great examples are [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs) and [uRequire](http://urequire.org).
+As you might suppose, you will run into both standards quite frequently, and there will be times you might want to use a CommonJS module with an AMD component and vice-versa. Please allow me to spoil your surprise: these standards are not naturally compatible!
+
+Nevertheless, a number of approaches are there to provide more compatibility between CommonJS and AMD, striving to come up with a way to write your module just once and have it working on both standards. Great interop examples are [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs) and [uRequire](http://urequire.org).
+
+AMD aficionados might also consider [Almond](https://github.com/jrburke/almond), a nifty lightweight AMD implementation which natively supports both synchronous and asynchronous loading. It is not really interop, however it is a single solution that benefits from both worlds.
 
 ## Now, forget about that. ES6 is right around the corner!
 
