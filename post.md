@@ -1,6 +1,6 @@
 If you feel like "no matter what you do, there is always something funky in your JavaScript code", I would bet that your Module strategy is not working out so well.
 
-The importance of adopting a proper JavaScript Module strategy is often underestimated as a preference contest, so it is indeed important to really understand your needs. This article exposes the foundations of different JavaScript Module strategies such as ad hoc, CommonJS, AMD and ES6 modules, and how to get started with ES6 modules right now.
+The importance of adopting a proper JavaScript Module strategy is often underestimated as a preference contest, so it is important to truly understand your needs. This article exposes the foundations of different JavaScript Module strategies such as ad hoc, CommonJS, AMD and ES6 modules, and how to get started with ES6 modules right now.
 
 ## JavaScript Module 101
 
@@ -54,20 +54,21 @@ I have put together a full [live example of the ad-hoc module](http://tiagorg.co
 
 Just to name a few reasons why every JavaScript developer should use modules as much as possible:
 
-- Writing scattered global JavaScript code is bad for performance, terrible for reusability, awkward for readability, painful for side-effects and horrible for code organization.
-- In JavaScript, literal objects' attributes and methods are all public, making it impossible  to conceal internal details of objects, which is a real demand for Components, Features, Subsystems and Façades.
+- Writing scattered global JavaScript code is bad for performance, terrible for reusability, causes awkward readability, is painful for side-effects, and horrible for code organization.
+- In JavaScript, literal objects' attributes and methods are all public, making it impossible to conceal internal details of objects, which is a real demand for Components, Features, Subsystems and Façades.
 - A module can be delivered as a dependency for other modules, leveraging a composite architecture of reusable components, when properly implemented.
-- Modules can also be packaged and deployed separately from each other, allowing changes on a particular module to be properly isolated from everything else, therefore mitigating those dreaded side-effects known as the "butterfly effect" (yes, just like in the movie).
+- Modules can also be packaged and deployed separately from each other, allowing changes on a particular module to be properly isolated from everything else, therefore mitigating those dreaded side-effects known as the "butterfly effect" (yes, just like the movie).
 - Splitting your global code into modules is the first step on bringing cohesion up and coupling down.
 
 ## To be or not to be, CommonJS or AMD?
 
-Have another look on the ad hoc module example above. Since we are defining 2 files, we are still writing and reading the variable ```Zoo``` into the global JavaScript context. This is definitely not recommended, once it is:
+Have another look on the ad hoc module example above. Since we are defining 2 files, we are still writing and reading the variable ```Zoo``` into the global JavaScript context. This is definitely not recommended, because it is:
+
 - fragile (as it is possible for any posterior code to modify/redefine your module),
 - not scalable (if you need to define 100 modules, all of them will be loaded on the global JavaScript context, even if you end up consuming just 1 out of those 100 modules, making it really bad for performance),
 - counter-productive (you have to manually resolve your dependencies, and you would need to remember to bring them altogether if you were to use your module in another application).
 
-A good solution for such setbacks is adopting a Module Loader. As a matter of fact, it would be entirely possible for you to write your own module loader! A simple homemade loader would just need to register modules under aliases, resolve dependencies through Dependency Injection and instantiate the modules through a Factory. 
+A good solution for such setbacks is adopting a Module Loader. As a matter of fact, it would be entirely possible for you to write your own module loader! A simple homemade loader would just need to register modules under aliases, resolve dependencies through Dependency Injection and instantiate the modules through a Factory.
 
 Over the course of time, many developers started to elaborate around modules and module loaders, striving for defining a multi-purpose Module Standard. After some coming and going, two module standards have gained some momentum:
 
@@ -85,7 +86,7 @@ Over the course of time, many developers started to elaborate around modules and
 - Since it is synchronous, the modules have to be loaded sequentially, which might take more time than if they were to be loaded asynchronously.
 - Usually, NPM modules are composed by many other modules, which means that you might end up depending on a high number of modules, and your bundles can easily get big.
 
-**When to use:** CommonJS is already a mature standard for the server-side, and a good option for the client-side when the page-load Javascript bundles are not too big.
+**When to use:** CommonJS is already a mature standard for the server-side, and a good option for the client-side when the Javascript bundles executed during the page load time are not too big.
 
 **How to use:** Your module file will publicly expose whatever is assigned to ```module.exports``` while everything else is private. In order to use your module, the client code needs to use the ```require(dependency)``` function, referencing your module per file location or alias.
 
@@ -142,7 +143,7 @@ This code is also available as a [live example of a Common.js module](http://tia
 - It isn't possible to guarantee the order of execution of asynchronous modules.
 - Its syntax can get hard to understand, specially when the dependencies array is large.
 
-**When to use:** AMD is specially interesting for client-side applications that can benefit from the lazy loading of modules, but it needs to be used carefully.
+**When to use:** AMD is specially interesting for client-side applications that can benefit from the lazy loading of modules, when this can be properly leveraged.
 
 **How to use:** Your module will publicly expose whatever is being returned on the callback function, similarly to our first ad hoc example. In order to use your module, the client code needs to refer to it (per file location or alias) on its dependencies array, which will map to an argument on its own callback function.
 
@@ -188,9 +189,9 @@ This code is also available as a [live example of an AMD module](http://tiagorg.
 
 ### Is there any interop?
 
-As you might suppose, you will run into both standards quite frequently, and there will be times you might want to use a CommonJS module with an AMD component and vice-versa. Please allow me to spoil your surprise: these standards are not naturally compatible!
+As you might guess, you will run into both standards quite frequently, and there will be times you might want to use a CommonJS module with an AMD component and vice-versa. Please allow me to spoil your surprise: these standards are not naturally compatible!
 
-Nevertheless, a number of approaches are there to provide more compatibility between CommonJS and AMD, striving to come up with a way to write your module just once and have it working on both standards. Great interop examples are [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs) and [uRequire](http://urequire.org).
+Nevertheless, a number of approaches are there to provide more compatibility between CommonJS and AMD, striving to come up with a way to write your module just once and have it working on both standards. Great interop examples are [UMD](https://github.com/umdjs/umd),  [SystemJS](https://github.com/systemjs/systemjs) and [uRequire](http://urequire.org).
 
 AMD aficionados might also consider [Almond](https://github.com/jrburke/almond), a nifty lightweight AMD implementation which natively supports both synchronous and asynchronous loading. It is not really interop, however it is a single solution that benefits from both worlds.
 
@@ -231,10 +232,9 @@ console.log(myWolf.bark()); // Werewolf: woooooow!
 ```    
 
 This code is also available as a [live example of an ES6 module](http://tiagorg.com/js-modules/es6/index.html). Make sure to [check the source code](https://github.com/tiagorg/js-modules/tree/gh-pages/es6). 
-
 Not only ES6 has brought modules, but it also brought a solution for the CommonJS vs AMD battle! According to this [Dr. Axel Rauschmayer's article](http://www.2ality.com/2014/09/es6-modules-final.html), ES6 modules will support both synchronous and asynchronous loading within the same syntax. And even better, they will work both on the browser and on the server!
 
-One more good news: this syntax is finalized, so further syntax changes aren't expected for ES6 Modules. This means that you can start learning it right now!
+One more piece of good news: this syntax is finalized, so further syntax changes aren't expected for ES6 Modules. This means that you can start learning it right now!
 
 ## Babel for the rescue
 
@@ -254,9 +254,9 @@ Since in a real project you are hopefully not transpiling files manually, but in
 
 ## Who you gonna call?
 
-Modules are a big deal for sure. All the most successful MV* frameworks rely on a strong module-oriented architecture, such as AngularJS, Ember.js, Marionette.js and React. This is why the JavaScript community is so concerned on striving for everyone to use them as seamless as possible, as you can see with the ES6 modules initiative.
+Modules are a big deal for sure. All the most successful MV* frameworks rely on a strong module-oriented architecture, such as AngularJS, Ember.js, Marionette.js and React. This is why the JavaScript community is so concerned with helping everyone use them as seamless as possible, as you can see with the ES6 modules initiative.
 
-However, we still have to take into consideration the plethora of existing code which is too big to be rewritten into ES6 anytime soon. Depending on the size, complexity and risk of the project, this might never happen. Still, even if all the major browsers start supporting ES6 this year, it would take a handful of years for most of the worldwide population (or at least your clients) to be effectively using those browser versions supporting ES6. Just for a sad-trombone example, IE 8 was released exactly 6 years ago.
+However, we still have to take into consideration the plethora of existing code which is too big to be rewritten into ES6 anytime soon. Depending on the size, complexity and risk of the project, this might never happen. Still, even if all the major browsers start supporting ES6 this year, it would take a handful of years for most of the worldwide population (or at least your clients) to be effectively using those browser versions supporting ES6. Just for an example [cue the sad-trombone], IE 8 was released exactly 6 years ago.
 
 Anyhow, the other way around is totally feasible and recommended. Writing new code on ES6 with a good transpiler is totally worth taking a deep look at. The benefits are great: more concise syntax, great support for the current Module strategies, and the best thing: you are embracing the future of JavaScript!
 
