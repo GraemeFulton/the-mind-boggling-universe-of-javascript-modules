@@ -1,4 +1,4 @@
-If you feel like "no matter what you do, there is always something funky in your JavaScript code", I would bet that your Module strategy is not working out so well.
+If you feel like, no matter what you do, there is always something funky in your JavaScript code, I would bet that your Module strategy is not working out so well.
 
 The importance of adopting a proper JavaScript Module strategy is often underestimated as a preference contest, so it is important to truly understand your needs. This article exposes the foundations of different JavaScript Module strategies such as ad hoc, CommonJS, AMD and ES6 modules, and how to get started with ES6 modules right now.
 
