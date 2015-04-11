@@ -236,7 +236,7 @@ Not only ES6 has brought modules, but it also brought a solution for the CommonJ
 
 One more piece of good news: this syntax is finalized, so further syntax changes aren't expected for ES6 Modules. This means that you can start learning it right now!
 
-## Babel for the rescue
+## Babel to the rescue
 
 Using ES6 modules sound thrilling, but since they are targeted for June 2015, what can you do before it gets released and adopted by all the major browsers and devices?
 
